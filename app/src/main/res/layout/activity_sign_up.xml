@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:background="@drawable/background">
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/register"
+        app:layout_constraintBottom_toTopOf="@+id/textView6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.901" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="52dp"
+        android:fontFamily="@font/my_bangla_font"
+        android:letterSpacing="0.03"
+        android:text="রেজিস্টার ফর্ম"
+        android:textColor="@color/white"
+        android:textSize="35dp"
+        app:layout_constraintBottom_toTopOf="@+id/register_username"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/register_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginBottom="7dp"
+        android:background="@drawable/forget"
+        android:drawableStart="@drawable/person_icon"
+        android:drawablePadding="5dp"
+        android:fontFamily="@font/my_bangla_font"
+        android:hint="আপনার নাম"
+        android:minHeight="48dp"
+        android:paddingStart="10dp"
+        android:textColor="#000000"
+        android:textColorHint="#737373"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/register_email"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/register_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginBottom="7dp"
+        android:background="@drawable/forget"
+        android:drawableStart="@drawable/email_icon"
+        android:drawablePadding="5dp"
+        android:drawableTint="@color/black"
+        android:fontFamily="@font/my_bangla_font"
+        android:hint="ইমেইল"
+        android:minHeight="48dp"
+        android:paddingStart="10dp"
+        android:textColor="#000000"
+        android:textColorHint="#737373"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/register_pass"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/register_pass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginBottom="7dp"
+        android:background="@drawable/forget"
+        android:drawableStart="@drawable/key_icon"
+        android:drawablePadding="5dp"
+        android:fontFamily="@font/my_bangla_font"
+        android:inputType="textPassword"
+        android:hint="পাসওয়ার্ড"
+        android:minHeight="48dp"
+        android:paddingStart="10dp"
+        android:textColor="#000000"
+        android:textColorHint="#737373"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/register_confirm_pass"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <EditText
+        android:id="@+id/register_confirm_pass"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginBottom="72dp"
+        android:background="@drawable/forget"
+        android:drawableStart="@drawable/key_icon"
+        android:drawablePadding="5dp"
+        android:fontFamily="@font/my_bangla_font"
+        android:hint="কনফার্ম পাসওয়ার্ড"
+        android:inputType="textPassword"
+        android:paddingStart="10dp"
+        android:minHeight="48dp"
+        android:textColor="#000000"
+        android:textColorHint="#737373"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/register_registerBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.606"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/register_registerBtn"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginHorizontal="100dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/black_btn"
+        android:fontFamily="@font/my_bangla_font"
+        android:text="রেজিস্টার"
+        android:textColor="#FFF"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toTopOf="@+id/register_login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/register_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:fontFamily="@font/my_bangla_font"
+        android:gravity="center"
+        android:text="@string/iflogin"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toTopOf="@+id/register_progressBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/register_progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:indeterminateTint="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

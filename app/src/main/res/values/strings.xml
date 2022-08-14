@@ -2,4 +2,7 @@
     <string name="app_name">মুহাসাবা</string>
 
     <string name="text_size">"25sp"</string>
+    <string name="forgot_password"><u>পাসওয়ার্ড ভুলে গেছেন?</u></string>
+    <string name="create_account"><u>একাউন্ট নেউ? একাউন্ট খুলুন</u></string>
+    <string name="iflogin"><u>একাউন্ট থাকলে - লগ ইন</u></string>
 </resources>

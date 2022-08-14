@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="forgot_password">পাসওয়ার্ড ভুলে গেছেন?</string>
+    <string name="create_account">একাউন্ট নেউ? একাউন্ট খুলুন</string>
+    <string name="iflogin">একাউন্ট থাকলে - লগ ইন</string>
+</resources>
