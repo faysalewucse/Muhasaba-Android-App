@@ -1,15 +1,27 @@
 package edu.bd.ewu.finalproject;
 
 public class UserInfo {
-    String username, email, password, user_key;
+    String username;
+    String email;
+    String password;
+    String user_key;
+    String pro_pic;
 
-    public UserInfo(String username, String email, String password, String user_key) {
+    public UserInfo(String username, String email, String password, String user_key, String pro_pic) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.user_key = user_key;
+        this.pro_pic = pro_pic;
     }
 
+    public String getPro_pic() {
+        return pro_pic;
+    }
+
+    public void setPro_pic(String pro_pic) {
+        this.pro_pic = pro_pic;
+    }
     public String getUsername() {
         return username;
     }

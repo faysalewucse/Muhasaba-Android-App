@@ -1,264 +1,280 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="20dp"
+    android:id="@+id/app_drawer"
+    tools:openDrawer="start"
     tools:context=".MainActivity">
 
-    <LinearLayout
-        android:id="@+id/date_time"
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigation"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:menu="@menu/drawer_menu_items"
+        android:layout_gravity="end"
+        app:headerLayout="@layout/nav_header"
+        android:background="@color/white"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/gradient_background"
-        android:gravity="center"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:elevation="15sp"
-        android:padding="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
-
-        <TextView
-            android:id="@+id/arabic_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/my_bangla_font"
-            android:text="১০ ই মুহাররম ১৪৪৪ হিজরী"
-            android:textColor="@color/white"
-            android:textSize="25sp" />
-
-        <TextView
-            android:id="@+id/wakto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/my_bangla_font"
-            android:paddingHorizontal="20dp"
-            android:paddingVertical="5dp"
-            android:text="যুহর: ১১ঃ৫৫ - ৪ঃ৪৫"
-            android:textColor="@color/white"
-            android:textSize="25sp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/sunset_count_sunrise"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/date_time">
+        android:padding="20dp">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginStart="10dp"
+            android:id="@+id/date_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/gradient_background"
             android:gravity="center"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/sun_rise_icon"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/sun_rise" />
-
-            <TextView
-                android:id="@+id/sun_rise_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/my_bangla_font"
-                android:gravity="center"
-                android:text="সুর্যদয়"
-                android:textColor="@color/black"
-                android:textSize="20sp" />
+            android:orientation="vertical"
+            android:elevation="15sp"
+            android:padding="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
 
             <TextView
-                android:id="@+id/sun_rise_time"
-                android:layout_width="match_parent"
+                android:id="@+id/arabic_date"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/my_bangla_font"
-                android:gravity="center"
-                android:text="৬ঃ৩০ AM"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:text="১০ ই মুহাররম ১৪৪৪ হিজরী"
+                android:textColor="@color/white"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/wakto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/my_bangla_font"
+                android:layout_marginTop="-5dp"
+                android:text="যুহর: ১১ঃ৫৫ - ৪ঃ৪৫"
+                android:textColor="@color/white"
+                android:textSize="25sp" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center">
+            android:id="@+id/sunset_count_sunrise"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/date_time">
 
-            <TextView
-                android:id="@+id/counter"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:background="@drawable/counter_background"
-                android:elevation="15dp"
-                android:fontFamily="@font/my_bangla_font"
+                android:layout_marginStart="10dp"
                 android:gravity="center"
-                android:text="৩৩"
-                android:textColor="@color/white"
-                android:textSize="50sp" />
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/sun_rise_icon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/sun_rise" />
+
+                <TextView
+                    android:id="@+id/sun_rise_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/my_bangla_font"
+                    android:gravity="center"
+                    android:text="সুর্যদয়"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/sun_rise_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/my_bangla_font"
+                    android:gravity="center"
+                    android:text="৬ঃ৩০ AM"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/counter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/my_bangla_font"
+                        android:gravity="center"
+                        android:background="@drawable/counter_background"
+                        android:text="৩৩"
+                        android:textColor="@color/white"
+                        android:textSize="40sp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="10dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/sun_set_icon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/sun_set" />
+
+                <TextView
+                    android:id="@+id/sun_set_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/my_bangla_font"
+                    android:gravity="center"
+                    android:text="সুর্যাস্ত"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/sun_set_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/my_bangla_font"
+                    android:gravity="center"
+                    android:text="৬ঃ৪৫ PM"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="10dp"
+            android:id="@+id/jikir_jikir_meaning"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/sun_set_icon"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/sun_set" />
-
-            <TextView
-                android:id="@+id/sun_set_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/my_bangla_font"
-                android:gravity="center"
-                android:text="সুর্যাস্ত"
-                android:textColor="@color/black"
-                android:textSize="20sp" />
+            android:orientation="vertical"
+            android:elevation="15dp"
+            android:paddingVertical="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/gradient_bg_rev"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sunset_count_sunrise">
 
             <TextView
-                android:id="@+id/sun_set_time"
-                android:layout_width="match_parent"
+                android:id="@+id/jikir"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/my_bangla_font"
-                android:gravity="center"
-                android:text="৬ঃ৪৫ PM"
-                android:textColor="@color/black"
+                android:paddingHorizontal="10dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="5dp"
+                android:text="سُـبْحانَ الله"
+                android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
+            <TextView
+                android:id="@+id/jikir_meaning"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/my_bangla_font"
+                android:text="আল্লাহ মহান পবিত্র"
+                android:layout_marginTop="-15dp"
+                android:textColor="@color/white"
+                android:textSize="25sp" />
+
         </LinearLayout>
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/jikir_jikir_meaning"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:elevation="15dp"
-        android:paddingVertical="5dp"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/gradient_bg_rev"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sunset_count_sunrise">
-
         <TextView
-            android:id="@+id/jikir"
+            android:id="@+id/ajker_amol"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/my_bangla_font"
-            android:paddingHorizontal="10dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="5dp"
-            android:text="سُـبْحانَ الله"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/jikir_meaning"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/my_bangla_font"
-            android:text="আল্লাহ মহান পবিত্র"
-            android:layout_marginTop="-15dp"
-            android:textColor="@color/white"
-            android:textSize="25sp" />
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/ajker_amol"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="আজকের আমল"
-        android:layout_marginTop="10dp"
-        android:textSize="25sp"
-        android:textColor="@color/black"
-        android:fontFamily="@font/my_bangla_font"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/jikir_jikir_meaning" />
-
-    <LinearLayout
-        android:id="@+id/jikir_list_layout"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintVertical_weight="1"
-        app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ajker_amol">
-
-        <ListView
-            android:id="@+id/todays_jikir_listview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
-    </LinearLayout>
-
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/jikir_list_layout">
-
-        <TextView
-            android:id="@+id/three_days_amal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
+            android:text="আজকের আমল"
             android:layout_marginTop="10dp"
-            android:background="@drawable/gradient_background"
-            android:elevation="5dp"
-            android:fontFamily="@font/my_bangla_font"
-            android:paddingHorizontal="15dp"
-            android:paddingVertical="5dp"
-            android:text="৩ দিনের আমল"
-            android:textColor="@color/white"
-            android:textSize="22sp" />
-
-        <TextView
-            android:id="@+id/plus_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/plus_btn_bg"
-            android:fontFamily="@font/my_bangla_font"
-            android:paddingHorizontal="15dp"
-            android:paddingVertical="10dp"
-            android:text="+"
+            android:textSize="25sp"
             android:textColor="@color/black"
-            android:textStyle="bold" />
+            android:fontFamily="@font/my_bangla_font"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/jikir_jikir_meaning" />
 
-    </RelativeLayout>
+        <LinearLayout
+            android:id="@+id/jikir_list_layout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintVertical_weight="1"
+            app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ajker_amol">
+
+            <ListView
+                android:id="@+id/todays_jikir_listview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/jikir_list_layout">
+
+            <TextView
+                android:id="@+id/three_days_amal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/gradient_background"
+                android:elevation="5dp"
+                android:fontFamily="@font/my_bangla_font"
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="5dp"
+                android:text="৩ দিনের আমল"
+                android:textColor="@color/white"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/plus_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/plus_btn_bg"
+                android:fontFamily="@font/my_bangla_font"
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="10dp"
+                android:text="+"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

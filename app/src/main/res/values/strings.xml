@@ -5,4 +5,6 @@
     <string name="forgot_password"><u>পাসওয়ার্ড ভুলে গেছেন?</u></string>
     <string name="create_account"><u>একাউন্ট নেউ? একাউন্ট খুলুন</u></string>
     <string name="iflogin"><u>একাউন্ট থাকলে - লগ ইন</u></string>
+    <string name="nav_open">Open</string>
+    <string name="nav_close">Close</string>
 </resources>

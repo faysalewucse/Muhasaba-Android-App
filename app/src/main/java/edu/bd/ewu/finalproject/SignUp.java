@@ -89,7 +89,7 @@ public class SignUp extends AppCompatActivity {
             String key = "#"+calendar.getTimeInMillis()+"#";
 
             MyDatabase db = new MyDatabase(this);
-            db.registerUser(name, email,pass, key);
+            db.registerUser(name, email,pass, key, "");
             db.close();
 
             startActivity(new Intent(getApplicationContext(), Login.class));

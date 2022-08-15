@@ -11,12 +11,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 public class Login extends AppCompatActivity {
 
-    private TextView register;
-    private Button login;
     private EditText LogIn_email,LogIn_pass;
     private ProgressBar progressBar;
 
@@ -26,8 +26,8 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         getSupportActionBar().hide();
 
-        register=findViewById(R.id.login_signUp);
-        login=findViewById(R.id.logInBtn);
+        TextView register = findViewById(R.id.login_signUp);
+        Button login = findViewById(R.id.logInBtn);
         LogIn_email=findViewById(R.id.login_email);
         LogIn_pass=findViewById(R.id.login_pass);
         progressBar=findViewById(R.id.LogIn_progressBar);
@@ -58,7 +58,7 @@ public class Login extends AppCompatActivity {
         }
         if(pass.isEmpty())
         {
-            LogIn_pass.setError("পাসওয়ার্ড বক্স টি খালি রাখা যাবেনা");
+            LogIn_pass.setError("পাসওয়ার্ড বক্স টি খালি রাখা যাবেন");
             LogIn_pass.requestFocus();
             return;
         }
@@ -72,11 +72,14 @@ public class Login extends AppCompatActivity {
             prefEditor.putString("USER_KEY", userInfo.user_key);
             prefEditor.putString("NAME", userInfo.username);
             prefEditor.putString("EMAIL", userInfo.email);
-            prefEditor.putString("IMAGE", "");
+            prefEditor.putString("IMAGE", userInfo.pro_pic);
 
             prefEditor.apply();
             progressBar.setVisibility(View.INVISIBLE);
             startActivity(new Intent(this, MainActivity.class));
+        }
+        else{
+            Toast.makeText(this, "ইমেইল বা পাসওয়ার্ড ভুল হয়েছে", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -97,7 +100,7 @@ public class Login extends AppCompatActivity {
         while(c.moveToNext()){
             email_ = c.getString(1);
             password = c.getString(2);
-
+            Log.d("TAG", "chekUserAuthentication: "+email_+password);
             if(email_.equals(email) && password.equals(pass)) return c.getString(3);
         }
         return "";

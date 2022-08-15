@@ -3,7 +3,6 @@ package edu.bd.ewu.finalproject;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 import android.widget.Toast;
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -18,8 +17,9 @@ class MyDatabase extends SQLiteOpenHelper {
     static final String EMAIL = "Email";
     static final String PASSWORD = "Password";
     static final String USER_KEY = "Userkey";
+    static final String PRO_PIC = "Image";
     static final String CREATE_TABLE = "CREATE TABLE "+TABLE_NAME+"("+USERNAME+
-            " VARCHAR(255),"+EMAIL+" VARCHAR(255),"+PASSWORD+" VARCHAR(255),"+USER_KEY+" VARCHAR(255))";
+            " VARCHAR(255),"+EMAIL+" VARCHAR(255),"+PASSWORD+" VARCHAR(255),"+USER_KEY+" VARCHAR(255),"+PRO_PIC+" VARCHAR(255))";
 
     private final Context context;
     public MyDatabase(Context context) {
@@ -66,20 +66,20 @@ class MyDatabase extends SQLiteOpenHelper {
         return res;
     }
 
-    public void registerUser(String username,String email, String password, String user_key) {
+    public void registerUser(String username,String email, String password, String user_key, String pro_pic) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(USERNAME, username);
         cv.put(EMAIL, email);
         cv.put(PASSWORD, password);
         cv.put(USER_KEY, user_key);
+        cv.put(PRO_PIC, pro_pic);
 
         try{
             db.insert(TABLE_NAME, null, cv);
-            Toast.makeText(context, "আপনার রেজিস্ট্রেশন সম্পন্ন হয়েছে", Toast.LENGTH_LONG).show();
         }catch (Exception e){
             handleError(db, e);
-            registerUser(username, email, password, user_key);
+            registerUser(username, email, password, user_key, pro_pic);
         }
     }
 
@@ -147,7 +147,8 @@ class MyDatabase extends SQLiteOpenHelper {
                         res.getString(0),
                         res.getString(1),
                         res.getString(2),
-                        res.getString(3));
+                        res.getString(3),
+                        res.getString(4));
             }
             return userInfo;
         }
