@@ -4,14 +4,12 @@ public class UserInfo {
     String username;
     String email;
     String password;
-    String user_key;
     String pro_pic;
 
-    public UserInfo(String username, String email, String password, String user_key, String pro_pic) {
+    public UserInfo(String username, String email, String password, String pro_pic) {
         this.username = username;
         this.email = email;
         this.password = password;
-        this.user_key = user_key;
         this.pro_pic = pro_pic;
     }
 
@@ -44,13 +42,5 @@ public class UserInfo {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getUser_key() {
-        return user_key;
-    }
-
-    public void setUser_key(String user_key) {
-        this.user_key = user_key;
     }
 }

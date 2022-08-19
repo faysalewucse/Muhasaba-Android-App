@@ -10,13 +10,30 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.annotations.NotNull;
 
 import java.util.Calendar;
 
 public class SignUp extends AppCompatActivity {
 
     private EditText register_name,register_email,register_pass,register_confirm_pass;
+    ProgressBar progressBar;
+    FirebaseAuth mAuth;
+    private DatabaseReference databaseReference;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +46,10 @@ public class SignUp extends AppCompatActivity {
         register_email=findViewById(R.id.register_email);
         register_pass=findViewById(R.id.register_pass);
         register_confirm_pass=findViewById(R.id.register_confirm_pass);
-        ProgressBar progressBar = findViewById(R.id.register_progressBar);
+        progressBar = findViewById(R.id.register_progressBar);
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("USERS");
+        mAuth =FirebaseAuth.getInstance();
 
         progressBar.setVisibility(View.GONE);
         signin.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), Login.class)));
@@ -60,11 +80,6 @@ public class SignUp extends AppCompatActivity {
             register_email.requestFocus();
             return;
         }
-        if(checkDuplicateEmail(email)){
-            register_email.setError("এই মেইল দিয়ে পুর্বে রেজিস্টার করা হয়েছিলো");
-            register_email.requestFocus();
-            return;
-        }
         if(pass.isEmpty())
         {
             register_pass.setError("পাসওয়ার্ড বক্স টি খালি রাখা যাবে না");
@@ -85,14 +100,36 @@ public class SignUp extends AppCompatActivity {
         }
         if(pass.equals(confirm_pass))
         {
-            Calendar calendar = Calendar.getInstance();
-            String key = "#"+calendar.getTimeInMillis()+"#";
+            progressBar.setVisibility(View.VISIBLE);
+            mAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull @NotNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
 
-            MyDatabase db = new MyDatabase(this);
-            db.registerUser(name, email,pass, key, "");
-            db.close();
+                        progressBar.setVisibility(View.GONE);
+                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                        String uid = user.getUid();
+                        UserInfo registerData = new UserInfo(name, email, pass, "gs://hanafifiqh-12bee.appspot.com/user_profile.png");
+                        databaseReference.child(uid).child("User Information").setValue(registerData);
+                        databaseReference.child(uid).child("Settings").child("notify").setValue("true");
+                        databaseReference.child(uid).child("Settings").child("notify_approval").setValue("true");
 
-            startActivity(new Intent(getApplicationContext(), Login.class));
+                        Toast.makeText(getApplicationContext(), "Signed Up Successfully", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getApplicationContext(), Login.class);
+                        startActivity(intent);
+                        finish();
+
+                    } else {
+                        if (task.getException() instanceof FirebaseAuthUserCollisionException) {
+                            progressBar.setVisibility(View.GONE);
+                            Toast.makeText(getApplicationContext(), "User is Already Registered", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Error : " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                }
+            });
         }
         else
         {
@@ -100,17 +137,5 @@ public class SignUp extends AppCompatActivity {
             register_confirm_pass.requestFocus();
             return;
         }
-    }
-
-    boolean checkDuplicateEmail(String e){
-        MyDatabase db = new MyDatabase(this);
-        Cursor c = db.getAllKeyValues();
-        String email ="";
-        while(c.moveToNext()){
-            email = c.getString(1);
-            Log.d("TAG", "checkDuplicateEmail: "+email);
-            if(email.equals(e)) return true;
-        }
-        return false;
     }
 }

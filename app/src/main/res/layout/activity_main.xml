@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/app_drawer"
     tools:openDrawer="start"
+    android:background="#664CAF50"
     tools:context=".MainActivity">
 
     <com.google.android.material.navigation.NavigationView
@@ -13,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         app:menu="@menu/drawer_menu_items"
-        android:layout_gravity="end"
+        android:layout_gravity="start"
         app:headerLayout="@layout/nav_header"
         android:background="@color/white"/>
 

@@ -31,19 +31,26 @@ dependencies {
 
     //For Circular Image
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+    implementation 'com.squareup.picasso:picasso:2.71828'
     //For DrawerLayout
     implementation "androidx.drawerlayout:drawerlayout:1.1.1"
-    //For Shadow
-    implementation 'com.github.fornewid:neumorphism:0.3.2'
+    //For Nav Drawer
+    implementation 'com.google.android.material:material:1.7.0-beta01'
 
     implementation 'androidx.appcompat:appcompat:1.5.0'
 
     implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    //Firebase
+    implementation 'com.google.firebase:firebase-storage:20.0.1'
+    implementation 'com.google.firebase:firebase-messaging:23.0.7'
+    implementation 'com.google.firebase:firebase-auth:21.0.7'
+    implementation 'com.google.firebase:firebase-database:20.0.5'
+    implementation platform('com.google.firebase:firebase-bom:28.4.0')
+
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
-    implementation 'com.google.firebase:firebase-database:20.0.5'
 }
 apply plugin: 'com.google.gms.google-services'

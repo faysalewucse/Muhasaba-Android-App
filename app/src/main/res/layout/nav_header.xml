@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="200dp"
     android:background="#22B573"
-    android:gravity="bottom"
+    android:gravity="center_vertical"
     android:orientation="vertical"
     android:padding="16dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
@@ -11,15 +11,14 @@
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/nav_header_propic"
         android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:src="@drawable/pro_pic" />
+        android:layout_height="80dp"/>
 
     <TextView
         android:id="@+id/nav_header_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Faysal Ahmad"
+        android:text=""
         android:textStyle="bold"
         android:textSize="16sp"
         android:textColor="@color/white"/>
@@ -29,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="12sp"
-        android:text="faysal.ewucse@gmail.com"
+        android:text=""
         android:textColor="@color/white"/>
 
 </LinearLayout>
