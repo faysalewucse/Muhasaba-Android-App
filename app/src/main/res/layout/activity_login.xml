@@ -11,8 +11,10 @@
     android:background="@drawable/background">
 
     <ImageView
+        android:id="@+id/imageView"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:layout_marginTop="70dp"
         android:layout_marginBottom="10dp"
         android:src="@drawable/log_in"
         app:layout_constraintBottom_toTopOf="@+id/textView3"
@@ -26,85 +28,85 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="120dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/my_bangla_font"
         android:letterSpacing="0.03"
         android:text="লগ ইন"
         android:textColor="@color/white"
         android:textSize="35sp"
-        app:layout_constraintBottom_toTopOf="@+id/login_email"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/login_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
         android:layout_marginHorizontal="50dp"
+        android:layout_marginTop="50dp"
         android:autofillHints="ইমেইল"
         android:background="@drawable/forget"
         android:drawableStart="@drawable/email_icon"
         android:drawablePadding="5dp"
+        android:elevation="10dp"
         android:fontFamily="@font/my_bangla_font"
         android:hint="ইমেইল"
         android:paddingStart="10dp"
-        android:elevation="10dp"
         android:paddingEnd="5dp"
         android:textColor="#000000"
         android:textColorHint="#737373"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/login_pass"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/login_pass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
         android:layout_marginHorizontal="50dp"
+        android:layout_marginTop="5dp"
         android:background="@drawable/forget"
         android:drawableStart="@drawable/key_icon"
         android:drawablePadding="5dp"
+        android:elevation="10dp"
         android:fontFamily="@font/my_bangla_font"
         android:hint="পাসওয়ার্ড"
-        android:paddingStart="10dp"
-        android:elevation="10dp"
         android:inputType="textPassword"
+        android:paddingStart="10dp"
         android:paddingEnd="5dp"
         android:textColor="#000000"
         android:textColorHint="#737373"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/login_pass_forget"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_email" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/login_pass_forget"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
-        android:layout_marginBottom="40dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/my_bangla_font"
         android:text="@string/forgot_password"
         android:textColor="@color/black"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/logInBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.790"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_pass" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/logInBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="100dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginTop="60dp"
         android:background="@drawable/button"
         android:elevation="10dp"
         android:fontFamily="@font/my_bangla_font"
@@ -112,35 +114,34 @@
         android:textColor="#FFF"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/login_signUp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_pass_forget" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/login_signUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="128dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/my_bangla_font"
         android:text="@string/create_account"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logInBtn" />
 
     <androidx.core.widget.ContentLoadingProgressBar
         android:id="@+id/LogIn_progressBar"
         style="?android:attr/progressBarStyle"
         android:layout_width="40dp"
         android:layout_height="38dp"
+        android:layout_marginTop="20dp"
         android:indeterminateTint="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_signUp"
-        app:layout_constraintVertical_bias="0.16" />
+        app:layout_constraintTop_toBottomOf="@+id/login_signUp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

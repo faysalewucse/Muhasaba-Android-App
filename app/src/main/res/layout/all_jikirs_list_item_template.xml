@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    android:padding="10dp"
+    android:elevation="5dp"
+    android:background="@drawable/gradient_background">
+
+        <TextView
+            android:id="@+id/select_jikirs_listview_listitem_jikir_text"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="9"
+            android:textColor="@color/white"
+            android:fontFamily="@font/my_bangla_font"
+            android:text=""
+            android:layout_marginTop="9dp"
+            android:textStyle="bold"
+            android:gravity="center_vertical"
+            android:textAlignment="textEnd"
+            android:textSize="20sp"
+            tools:ignore="RtlCompat" />
+
+        <CheckBox
+            android:id="@+id/select_jikirs_listview_listitem_checkbox"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:buttonTint="@color/white"
+            android:backgroundTint="@color/white"
+            android:layout_height="wrap_content"/>
+
+
+</LinearLayout>

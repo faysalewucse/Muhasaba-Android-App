@@ -25,7 +25,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.annotations.NotNull;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class SignUp extends AppCompatActivity {
 
@@ -106,13 +109,18 @@ public class SignUp extends AppCompatActivity {
                 public void onComplete(@NonNull @NotNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
 
+
                         progressBar.setVisibility(View.GONE);
                         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                         String uid = user.getUid();
+                        String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+
                         UserInfo registerData = new UserInfo(name, email, pass, "gs://hanafifiqh-12bee.appspot.com/user_profile.png");
                         databaseReference.child(uid).child("User Information").setValue(registerData);
                         databaseReference.child(uid).child("Settings").child("notify").setValue("true");
                         databaseReference.child(uid).child("Settings").child("notify_approval").setValue("true");
+                        databaseReference.child(uid).child("Jikirs").child(date).child("name").setValue("لَا إِلَٰهَ إِلَّا ٱللَّٰهُ");
+                        databaseReference.child(uid).child("Jikirs").child(date).child("count").setValue(0);
 
                         Toast.makeText(getApplicationContext(), "Signed Up Successfully", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getApplicationContext(), Login.class);

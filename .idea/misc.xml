@@ -8,6 +8,8 @@
         <entry key="..\:/Users/Faysal Ahmad/StudioProjects/FinalProject/app/src/main/res/drawable/sun_rise.xml" value="0.222" />
         <entry key="..\:/Users/Faysal Ahmad/StudioProjects/FinalProject/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Faysal Ahmad/StudioProjects/FinalProjectCSE489/app/src/main/res/drawable/background.xml" value="0.222" />
+        <entry key="..\:/Users/Faysal Ahmad/StudioProjects/FinalProjectCSE489/app/src/main/res/drawable/black_border_bg.xml" value="0.2225" />
+        <entry key="..\:/Users/Faysal Ahmad/StudioProjects/FinalProjectCSE489/app/src/main/res/drawable/black_btn.xml" value="0.2225" />
         <entry key="..\:/Users/Faysal Ahmad/StudioProjects/FinalProjectCSE489/app/src/main/res/drawable/button.xml" value="0.222" />
         <entry key="..\:/Users/Faysal Ahmad/StudioProjects/FinalProjectCSE489/app/src/main/res/drawable/counter_background.xml" value="0.222" />
         <entry key="..\:/Users/Faysal Ahmad/StudioProjects/FinalProjectCSE489/app/src/main/res/drawable/forget.xml" value="0.222" />
@@ -15,19 +17,25 @@
         <entry key="..\:/Users/Faysal Ahmad/StudioProjects/FinalProjectCSE489/app/src/main/res/drawable/gradient_bg_rev.xml" value="0.222" />
         <entry key="..\:/Users/Faysal Ahmad/StudioProjects/FinalProjectCSE489/app/src/main/res/drawable/nav_header.xml" value="0.222" />
         <entry key="..\:/Users/Faysal Ahmad/StudioProjects/FinalProjectCSE489/app/src/main/res/drawable/plus_btn_bg.xml" value="0.222" />
+        <entry key="..\:/Users/Faysal Ahmad/StudioProjects/FinalProjectCSE489/app/src/main/res/drawable/rounded_green_bg.xml" value="0.2225" />
         <entry key="..\:/Users/Faysal Ahmad/StudioProjects/FinalProjectCSE489/app/src/main/res/drawable/rounded_white_bg.xml" value="0.222" />
         <entry key="..\:/Users/Faysal Ahmad/StudioProjects/FinalProjectCSE489/app/src/main/res/drawable/splash_screen.xml" value="0.222" />
         <entry key="..\:/Users/Faysal Ahmad/StudioProjects/FinalProjectCSE489/app/src/main/res/font-v26/shorif_jonota.xml" value="0.39076923076923076" />
         <entry key="..\:/Users/Faysal Ahmad/StudioProjects/FinalProjectCSE489/app/src/main/res/font/my_bangla_font.xml" value="0.39076923076923076" />
         <entry key="..\:/Users/Faysal Ahmad/StudioProjects/FinalProjectCSE489/app/src/main/res/font/shorif_jonota.xml" value="0.38974358974358975" />
         <entry key="..\:/Users/Faysal Ahmad/StudioProjects/FinalProjectCSE489/app/src/main/res/layout-v26/activity_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Faysal Ahmad/StudioProjects/FinalProjectCSE489/app/src/main/res/layout/activity_all_jikirs.xml" value="0.3009833262077811" />
         <entry key="..\:/Users/Faysal Ahmad/StudioProjects/FinalProjectCSE489/app/src/main/res/layout/activity_login.xml" value="0.29717180244829045" />
         <entry key="..\:/Users/Faysal Ahmad/StudioProjects/FinalProjectCSE489/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/Faysal Ahmad/StudioProjects/FinalProjectCSE489/app/src/main/res/layout/activity_main2.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Faysal Ahmad/StudioProjects/FinalProjectCSE489/app/src/main/res/layout/activity_my_history.xml" value="0.33" />
+        <entry key="..\:/Users/Faysal Ahmad/StudioProjects/FinalProjectCSE489/app/src/main/res/layout/activity_select_jikir.xml" value="0.3009833262077811" />
         <entry key="..\:/Users/Faysal Ahmad/StudioProjects/FinalProjectCSE489/app/src/main/res/layout/activity_sign_up.xml" value="0.35260416666666666" />
         <entry key="..\:/Users/Faysal Ahmad/StudioProjects/FinalProjectCSE489/app/src/main/res/layout/activity_splash_screen.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Faysal Ahmad/StudioProjects/FinalProjectCSE489/app/src/main/res/layout/all_jikirs_list_item.xml" value="0.30012825994014536" />
+        <entry key="..\:/Users/Faysal Ahmad/StudioProjects/FinalProjectCSE489/app/src/main/res/layout/all_jikirs_list_item_template.xml" value="0.3052586575459598" />
         <entry key="..\:/Users/Faysal Ahmad/StudioProjects/FinalProjectCSE489/app/src/main/res/layout/nav_header.xml" value="0.29717180244829045" />
+        <entry key="..\:/Users/Faysal Ahmad/StudioProjects/FinalProjectCSE489/app/src/main/res/layout/todays_jikir_listview_template.xml" value="0.3052586575459598" />
         <entry key="..\:/Users/Faysal Ahmad/StudioProjects/FinalProjectCSE489/app/src/main/res/menu/drawer_menu_items.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Faysal Ahmad/StudioProjects/FinalProjectCSE489/app/src/main/res/menu/option_menu.xml" value="0.365625" />
       </map>
