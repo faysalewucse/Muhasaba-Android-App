@@ -3,7 +3,6 @@ package edu.bd.ewu.finalproject;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,6 +55,8 @@ public class SelectJikirAdapter extends ArrayAdapter<JikirData> {
 
         checkBox.setOnClickListener(v -> {
             JikirData jikirData = new JikirData(id, name, meaning, benefit);
+            jikirData.setCount("0");
+            jikirData.setTarget("100");
             if(checkBox.isChecked())
             {
                 selectedJikirs.add(jikirData);
@@ -75,7 +76,7 @@ public class SelectJikirAdapter extends ArrayAdapter<JikirData> {
                 FirebaseDatabase.getInstance().getReference("USERS").child(uid).child("Jikirs").
                         child(java.time.LocalDate.now().toString()).child(selectedJikirs.get(i).id).setValue(selectedJikirs.get(i));
             }
-            context.startActivity(new Intent(context, MainActivity.class));
+            context.startActivity(new Intent(getContext(), MainActivity.class));
         });
 
         return convertView;

@@ -1,27 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="10dp"
-    android:padding="5dp"
     android:elevation="5dp"
-    >
+    android:background="@drawable/rounded_white_bg">
 
     <TextView
         android:id="@+id/today_jikirs_name"
         android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="9"
-        android:textColor="@color/black"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text=""
+        android:textAlignment="textEnd"
+        android:layout_marginEnd="5dp"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/roundborder"
+        android:padding="5dp"
+        android:visibility="gone"
+        android:text="সম্পূর্ণ হয়েছে " />
+
+    <TextView
+        android:id="@+id/countTarget"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:fontFamily="@font/my_bangla_font"
         android:text=""
-        android:layout_marginTop="9dp"
-        android:textStyle="bold"
-        android:gravity="center_vertical"
-        android:textAlignment="textEnd"
-        android:textSize="20sp"
-        tools:ignore="RtlCompat" />
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:textStyle="bold"/>
 
+    <ImageView
+        android:id="@+id/notificationBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_notification" />
+
+    <ImageView
+        android:id="@+id/jikirEditBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_edit"
+
+        />
 
 </LinearLayout>

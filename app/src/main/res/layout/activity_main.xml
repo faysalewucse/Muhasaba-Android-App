@@ -120,7 +120,7 @@
                         android:fontFamily="@font/my_bangla_font"
                         android:gravity="center"
                         android:background="@drawable/counter_background"
-                        android:text="৩৩"
+                        android:text="০"
                         android:textColor="@color/white"
                         android:textSize="40sp" />
 
@@ -187,17 +187,22 @@
                 android:paddingHorizontal="10dp"
                 android:paddingTop="10dp"
                 android:paddingBottom="5dp"
-                android:text="سُـبْحانَ الله"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold" />
+
+            <ProgressBar
+                android:id="@+id/jikir_progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:indeterminateTint="@color/white"/>
 
             <TextView
                 android:id="@+id/jikir_meaning"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/my_bangla_font"
-                android:text="আল্লাহ মহান পবিত্র"
                 android:layout_marginTop="-15dp"
                 android:textColor="@color/white"
                 android:textSize="25sp" />
@@ -220,6 +225,7 @@
             android:id="@+id/jikir_list_layout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:visibility="gone"
             app:layout_constraintVertical_weight="1"
             app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
             app:layout_constraintEnd_toEndOf="parent"
@@ -230,14 +236,27 @@
                 android:id="@+id/todays_jikir_listview"
                 android:layout_width="match_parent"
                 android:dividerHeight="5dp"
+                android:divider="#00ffffff"
                 android:layout_height="match_parent"/>
 
         </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/jikir_listview_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateTint="@color/white"
+            app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ajker_amol"/>
 
         <LinearLayout
             android:id="@+id/no_jikir"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:orientation="vertical"
+            android:visibility="gone"
             app:layout_constraintVertical_weight="1"
             app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
             app:layout_constraintEnd_toEndOf="parent"

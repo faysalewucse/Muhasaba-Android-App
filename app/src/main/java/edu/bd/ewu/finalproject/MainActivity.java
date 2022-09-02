@@ -7,15 +7,21 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
@@ -29,6 +35,8 @@ import com.google.firebase.database.annotations.NotNull;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -40,12 +48,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     DatabaseReference databaseReference, user_jikirs;
     ArrayList<JikirData> jikirData = new ArrayList<>();
     ArrayList<String> ids = new ArrayList<>();
-    TextView  nav_header_username, nav_header_usermail, plus_btn;
+    TextView  nav_header_username, nav_header_usermail, plus_btn, jikir_name, jikir_meaning, count;
     CircleImageView nav_pro_pic;
     NavigationView navigationView;
     ListView todays_jikirs;
     LinearLayout jikir_list_layout, no_jikir_layout;
     long length;
+    int selectedItemId;
+    ProgressBar jikir_progress, jikir_listview_progress;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -87,11 +97,98 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         todays_jikirs = findViewById(R.id.todays_jikir_listview);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.bringToFront();
+        jikir_progress = findViewById(R.id.jikir_progress);
+        jikir_listview_progress = findViewById(R.id.jikir_listview_progress);
 
         View header = navigationView.getHeaderView(0);
         nav_header_username = header.findViewById(R.id.nav_header_username);
         nav_header_usermail = header.findViewById(R.id.nav_header_user_email);
         nav_pro_pic = header.findViewById(R.id.nav_header_propic);
+
+        jikir_name =  findViewById(R.id.jikir);
+        jikir_meaning =  findViewById(R.id.jikir_meaning);
+        count =  findViewById(R.id.counter);
+        final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.tap_sound);
+        jikir_name.setVisibility(View.GONE);
+        jikir_meaning.setVisibility(View.GONE);
+        jikir_progress.setVisibility(View.VISIBLE);
+        jikir_listview_progress.setVisibility(View.VISIBLE);
+
+        //fetching user current jikirs
+        user_jikirs.child(uid).child("Jikirs").child(java.time.LocalDate.now().toString()).addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                jikirData.clear();
+                ids.clear();
+                length = snapshot.getChildrenCount();
+                for (DataSnapshot dataSnapshot: snapshot.getChildren()) {
+
+                    String id = dataSnapshot.child("id").getValue().toString();
+                    String name = dataSnapshot.child("name").getValue().toString();
+                    String meaning = dataSnapshot.child("meaning").getValue().toString();
+                    String benefit = dataSnapshot.child("benefit").getValue().toString();
+                    String count = dataSnapshot.child("count").getValue().toString();
+                    String target = dataSnapshot.child("target").getValue().toString();
+
+                    ids.add(id);
+                    JikirData data = new JikirData(id, name, meaning, benefit);
+                    data.setCount(count);
+                    data.setTarget(target);
+                    jikirData.add(data);
+
+                }
+
+                if(length == 0){
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    no_jikir_layout.setVisibility(View.VISIBLE);
+                    jikir_progress.setVisibility(View.GONE);
+                    jikir_listview_progress.setVisibility(View.GONE);
+                    jikir_list_layout.setVisibility(View.GONE);
+                }
+                else{
+                    jikir_progress.setVisibility(View.GONE);
+                    jikir_listview_progress.setVisibility(View.GONE);
+                    jikir_name.setVisibility(View.VISIBLE);
+                    jikir_meaning.setVisibility(View.VISIBLE);
+                    no_jikir_layout.setVisibility(View.GONE);
+                    jikir_list_layout.setVisibility(View.VISIBLE);
+
+                    selectedItemId = Integer.parseInt(jikirData.get(0).id);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        TodayJikirsAdapter cAdaper = new TodayJikirsAdapter(getApplicationContext(),
+                jikirData, jikir_name, jikir_meaning, count);
+        todays_jikirs.setAdapter(cAdaper);
+        todays_jikirs.setOnItemClickListener((parent, view, position, id) -> {
+
+            cAdaper.seletedItemId = position;
+            selectedItemId = Integer.parseInt(jikirData.get(position).id);
+            cAdaper.notifyDataSetChanged();
+        });
+
+        count.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mediaPlayer.start();
+                System.out.println("CLICKED");
+                MakeEnglishtoBangla metob = new MakeEnglishtoBangla();
+                user_jikirs.child(uid).child("Jikirs").child(java.time.LocalDate.now().toString())
+                        .child(String.valueOf(selectedItemId))
+                        .child("count")
+                        .setValue(String.valueOf(Integer.parseInt(metob.makeReverse((String) count.getText())) + 1));
+            }
+        });
 
 
         toogle = new ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close);
@@ -109,44 +206,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent i = new Intent(this, SelectJikir.class);
             i.putExtra("ids", ids);
             startActivity(i);
-        });
-        //fetching user current jikirs
-        user_jikirs.child(uid).child("Jikirs").child(java.time.LocalDate.now().toString()).addValueEventListener(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                jikirData.clear();
-                ids.clear();
-                length = snapshot.getChildrenCount();
-                for (DataSnapshot dataSnapshot: snapshot.getChildren()){
-
-                    String id = dataSnapshot.child("id").getValue().toString();
-                    String name = dataSnapshot.child("name").getValue().toString();
-                    String meaning = dataSnapshot.child("meaning").getValue().toString();
-                    String benefit = dataSnapshot.child("benefit").getValue().toString();
-
-                    ids.add(id);
-                    JikirData data = new JikirData(id, name, meaning, benefit);
-                    jikirData.add(data);
-
-                }
-
-                if(length == 0){
-                    jikir_list_layout.setVisibility(View.GONE);
-                }
-                else{
-                    no_jikir_layout.setVisibility(View.GONE);
-                    jikir_list_layout.setVisibility(View.VISIBLE);
-                }
-
-                TodayJikirsAdapter cAdaper = new TodayJikirsAdapter(getApplicationContext(), jikirData);
-                todays_jikirs.setAdapter(cAdaper);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
         });
     }
 
