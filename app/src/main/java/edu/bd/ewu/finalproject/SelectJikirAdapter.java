@@ -16,6 +16,7 @@ import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ public class SelectJikirAdapter extends ArrayAdapter<JikirData> {
     TextView add_selected_btn;
     String uid= FirebaseAuth.getInstance().getUid();
 
-    public SelectJikirAdapter( Context context, ArrayList<JikirData> allJikirs, TextView add_selected) {
+    public SelectJikirAdapter(Context context, ArrayList<JikirData> allJikirs, TextView add_selected) {
         super(context, R.layout.all_jikirs_list_item_template, allJikirs);
         this.context = context;
         this.add_selected_btn = add_selected;
@@ -48,15 +49,15 @@ public class SelectJikirAdapter extends ArrayAdapter<JikirData> {
         String name = getItem(position).getName();
         String meaning = getItem(position).getMeaning();
         String benefit = getItem(position).getBenefit();
+        String count = getItem(position).getCount();
+        String target = getItem(position).getTarget();
 
         TextView jikir_name = convertView.findViewById(R.id.select_jikirs_listview_listitem_jikir_text);
         CheckBox checkBox = convertView.findViewById(R.id.select_jikirs_listview_listitem_checkbox);
         jikir_name.setText(name);
 
         checkBox.setOnClickListener(v -> {
-            JikirData jikirData = new JikirData(id, name, meaning, benefit);
-            jikirData.setCount("0");
-            jikirData.setTarget("100");
+            JikirData jikirData = new JikirData(id, name, meaning, benefit, count, target);
             if(checkBox.isChecked())
             {
                 selectedJikirs.add(jikirData);
@@ -66,17 +67,17 @@ public class SelectJikirAdapter extends ArrayAdapter<JikirData> {
                     selectedJikirs.remove(jikirData);
                 }
             }
-            //Log.d("TAG", selectedJikirs.get(0).benefit);
-//                System.out.println("SJ:"+selectedJikirs);
         });
 
         add_selected_btn.setOnClickListener(v -> {
             for (int i = 0; i < selectedJikirs.size();i++){
-                //Log.d("TAG", selectedJikirs.get(i).benefit);
-                FirebaseDatabase.getInstance().getReference("USERS").child(uid).child("Jikirs").
-                        child(java.time.LocalDate.now().toString()).child(selectedJikirs.get(i).id).setValue(selectedJikirs.get(i));
+                FirebaseDatabase.getInstance().getReference("USERS").child(uid).child("Jikirs")
+                        .child(java.time.LocalDate.now().toString())
+                        .child(selectedJikirs.get(i).id).setValue(selectedJikirs.get(i));
             }
-            context.startActivity(new Intent(getContext(), MainActivity.class));
+            Intent intent = new Intent(context, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
         });
 
         return convertView;

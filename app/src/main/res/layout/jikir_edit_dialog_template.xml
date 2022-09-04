@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="বর্তমান গণনা"
+        android:fontFamily="@font/my_bangla_font"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        />
+    <EditText
+        android:id="@+id/present_jikir_editBox"
+        android:layout_width="match_parent"
+        android:background="@drawable/rounded_green_bg"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="আজকের লক্ষ/ টার্গেট"
+        android:fontFamily="@font/my_bangla_font"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        />
+    <EditText
+        android:id="@+id/target_jikir_editBox"
+        android:layout_width="match_parent"
+        android:background="@drawable/rounded_green_bg"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

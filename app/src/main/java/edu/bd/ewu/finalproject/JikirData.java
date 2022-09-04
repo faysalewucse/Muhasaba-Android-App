@@ -2,13 +2,13 @@ package edu.bd.ewu.finalproject;
 
 public class JikirData {
     String id, name, meaning, benefit, count, target;
-
-
-    public JikirData(String id, String name, String meaning, String benefit) {
+    public JikirData(String id, String name, String meaning, String benefit, String count, String target) {
         this.id = id;
         this.name = name;
         this.meaning = meaning;
         this.benefit = benefit;
+        this.count = count;
+        this.target = target;
     }
 
     public String getId() {

@@ -35,4 +35,34 @@ public class MakeEnglishtoBangla {
         }
         return result;
     }
+
+    public String makeHijriDate(String month){
+        switch (month) {
+            case "01":
+                return "মুহাররম";
+            case "02":
+                return "সফর";
+            case "03":
+                return "রবিউল আউয়াল";
+            case "04":
+                return "রবিউস সানি";
+            case "05":
+                return "জমাদিউল আউয়াল";
+            case "06":
+                return "জমাদিউস সানি";
+            case "07":
+                return "রজব";
+            case "08":
+                return "শাবান";
+            case "09":
+                return "রমজান";
+            case "10":
+                return "শাওয়ান";
+            case "11":
+                return "জিলক্বদ";
+            case "12":
+                return "জিলহজ্জ";
+        }
+        return "";
+    }
 }

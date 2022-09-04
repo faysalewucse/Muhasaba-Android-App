@@ -44,7 +44,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/my_bangla_font"
-                android:text="১০ ই মুহাররম ১৪৪৪ হিজরী"
                 android:textColor="@color/white"
                 android:textSize="25sp" />
 
@@ -54,7 +53,6 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/my_bangla_font"
                 android:layout_marginTop="-5dp"
-                android:text="যুহর: ১১ঃ৫৫ - ৪ঃ৪৫"
                 android:textColor="@color/white"
                 android:textSize="25sp" />
 
@@ -100,7 +98,6 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/my_bangla_font"
                     android:gravity="center"
-                    android:text="৬ঃ৩০ AM"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -156,7 +153,6 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/my_bangla_font"
                     android:gravity="center"
-                    android:text="৬ঃ৪৫ PM"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold" />
