@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle toogle;
     String uid= FirebaseAuth.getInstance().getUid();
-    DatabaseReference databaseReference, user_jikirs;
+    DatabaseReference databaseReference, user_jikirs, leaderBoardDataRef;
     ArrayList<JikirData> jikirData = new ArrayList<>();
     ArrayList<String> ids = new ArrayList<>();
     TextView  nav_header_username, nav_header_usermail, plus_btn, jikir_name, jikir_meaning, count, wakto, hijriDate,
@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     LinearLayout jikir_list_layout, no_jikir_layout;
     long length;
     int selectedItemId;
+    String points;
     ProgressBar jikir_progress, jikir_listview_progress;
     ArrayList<String> completed_ids = new ArrayList<>();
 
@@ -79,6 +80,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         databaseReference = FirebaseDatabase.getInstance().getReference("USERS");
         user_jikirs = FirebaseDatabase.getInstance().getReference("USERS");
+        leaderBoardDataRef = FirebaseDatabase.getInstance().getReference("LEADERBOARD");
         //fetching user personal information
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -137,6 +139,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         .child(String.valueOf(selectedItemId))
                         .child("count")
                         .setValue(String.valueOf(Integer.parseInt(metob.makeReverse((String) count.getText())) + 1));
+                leaderBoardDataRef.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        points = snapshot.child("points").getValue().toString();
+                        leaderBoardDataRef.child(uid).child("points").setValue(String.valueOf(Integer.parseInt(points)+1));
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
             }
             else{
                 Toast.makeText(this, "আলহামদুলিল্লাহ আপনি এটি সম্পন্ন করে ফেলেছেন", Toast.LENGTH_SHORT).show();
@@ -220,6 +234,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.logout) {
             showDialogue("আপনি কি শিওর যে লগ আউট করবেন?", "সত্যি?", "হ্যা", "বাদ দিন");
+        }
+        else if (item.getItemId() == R.id.leaderborad) {
+            startActivity(new Intent(this, LeaderBoard.class));
         }
         return true;
     }

@@ -9,6 +9,14 @@
             android:icon="@drawable/person_icon"
             android:title="Profile" />
         <item
+            android:id="@+id/user_history"
+            android:icon="@drawable/history"
+            android:title="History" />
+        <item
+            android:id="@+id/leaderborad"
+            android:icon="@drawable/leaderboard"
+            android:title="Leader Board" />
+        <item
             android:id="@+id/logout"
             android:icon="@drawable/log_out"
             android:title="Logout" />

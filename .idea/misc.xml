@@ -33,6 +33,7 @@
         <entry key="..\:/Users/Faysal Ahmad/StudioProjects/FinalProjectCSE489/app/src/main/res/layout/activity_all_jikirs.xml" value="0.3009833262077811" />
         <entry key="..\:/Users/Faysal Ahmad/StudioProjects/FinalProjectCSE489/app/src/main/res/layout/activity_history.xml" value="0.3052586575459598" />
         <entry key="..\:/Users/Faysal Ahmad/StudioProjects/FinalProjectCSE489/app/src/main/res/layout/activity_jikir_details.xml" value="0.3052586575459598" />
+        <entry key="..\:/Users/Faysal Ahmad/StudioProjects/FinalProjectCSE489/app/src/main/res/layout/activity_leader_board.xml" value="0.25" />
         <entry key="..\:/Users/Faysal Ahmad/StudioProjects/FinalProjectCSE489/app/src/main/res/layout/activity_login.xml" value="0.29717180244829045" />
         <entry key="..\:/Users/Faysal Ahmad/StudioProjects/FinalProjectCSE489/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/Faysal Ahmad/StudioProjects/FinalProjectCSE489/app/src/main/res/layout/activity_main2.xml" value="0.36666666666666664" />
@@ -45,6 +46,7 @@
         <entry key="..\:/Users/Faysal Ahmad/StudioProjects/FinalProjectCSE489/app/src/main/res/layout/history_listview_child_template.xml" value="0.3052586575459598" />
         <entry key="..\:/Users/Faysal Ahmad/StudioProjects/FinalProjectCSE489/app/src/main/res/layout/history_listview_template.xml" value="0.33" />
         <entry key="..\:/Users/Faysal Ahmad/StudioProjects/FinalProjectCSE489/app/src/main/res/layout/jikir_edit_dialog_template.xml" value="0.3052586575459598" />
+        <entry key="..\:/Users/Faysal Ahmad/StudioProjects/FinalProjectCSE489/app/src/main/res/layout/leaderboard_template.xml" value="0.33" />
         <entry key="..\:/Users/Faysal Ahmad/StudioProjects/FinalProjectCSE489/app/src/main/res/layout/nav_header.xml" value="0.29717180244829045" />
         <entry key="..\:/Users/Faysal Ahmad/StudioProjects/FinalProjectCSE489/app/src/main/res/layout/todays_jikir_listview_template.xml" value="0.3052586575459598" />
         <entry key="..\:/Users/Faysal Ahmad/StudioProjects/FinalProjectCSE489/app/src/main/res/menu/drawer_menu_items.xml" value="0.36666666666666664" />
