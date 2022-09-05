@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:elevation="5dp"
+    android:gravity="center"
     android:background="@drawable/rounded_white_bg">
 
     <TextView
@@ -17,11 +18,13 @@
         android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/task_completed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/roundborder"
+        android:background="@drawable/rounded_white_bg"
         android:padding="5dp"
-        android:visibility="gone"
+        android:fontFamily="@font/my_bangla_font"
+        android:textColor="@color/white"
         android:text="সম্পূর্ণ হয়েছে " />
 
     <TextView

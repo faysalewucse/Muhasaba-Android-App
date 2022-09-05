@@ -4,7 +4,7 @@ public class MakeEnglishtoBangla {
     public String make(String number){
         String result = "";
         for (int i = 0; i < number.length(); i++) {
-            if(i == '0') result += '০';
+            if(number.charAt(i) == '0') result += '০';
             else if(number.charAt(i) == '1') result += '১';
             else if(number.charAt(i) == '2') result += '২';
             else if(number.charAt(i) == '3') result += '৩';

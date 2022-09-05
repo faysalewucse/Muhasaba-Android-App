@@ -18,10 +18,12 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -55,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle toogle;
     String uid= FirebaseAuth.getInstance().getUid();
-    DatabaseReference databaseReference, user_jikirs, user_jikirs_history;
+    DatabaseReference databaseReference, user_jikirs;
     ArrayList<JikirData> jikirData = new ArrayList<>();
     ArrayList<String> ids = new ArrayList<>();
     TextView  nav_header_username, nav_header_usermail, plus_btn, jikir_name, jikir_meaning, count, wakto, hijriDate,
@@ -66,8 +68,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     LinearLayout jikir_list_layout, no_jikir_layout;
     long length;
     int selectedItemId;
-    DateTimeData dateTimeData;
     ProgressBar jikir_progress, jikir_listview_progress;
+    ArrayList<String> completed_ids = new ArrayList<>();
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -77,7 +79,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         databaseReference = FirebaseDatabase.getInstance().getReference("USERS");
         user_jikirs = FirebaseDatabase.getInstance().getReference("USERS");
-        user_jikirs_history = FirebaseDatabase.getInstance().getReference("USERS");
         //fetching user personal information
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -130,12 +131,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //Big Circle Click to Update Jikir Count Data
         count.setOnClickListener(v -> {
             mediaPlayer.start();
-            System.out.println(selectedItemId);
             MakeEnglishtoBangla metob = new MakeEnglishtoBangla();
-            user_jikirs_history.child(uid).child("Jikirs").child(java.time.LocalDate.now().toString())
-                    .child(String.valueOf(selectedItemId))
-                    .child("count")
-                    .setValue(String.valueOf(Integer.parseInt(metob.makeReverse((String) count.getText())) + 1));
+            if(!completed_ids.contains(String.valueOf(selectedItemId))){
+                user_jikirs.child(uid).child("Jikirs").child(java.time.LocalDate.now().toString())
+                        .child(String.valueOf(selectedItemId))
+                        .child("count")
+                        .setValue(String.valueOf(Integer.parseInt(metob.makeReverse((String) count.getText())) + 1));
+            }
+            else{
+                Toast.makeText(this, "আলহামদুলিল্লাহ আপনি এটি সম্পন্ন করে ফেলেছেন", Toast.LENGTH_SHORT).show();
+            }
         });
 
 
@@ -205,6 +210,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if(item.getItemId() == R.id.logout){
             showDialogue("আপনি কি শিওর যে লগ আউট করবেন?", "সত্যি?", "হ্যা", "বাদ দিন");
         }
+        else if(item.getItemId() == R.id.history){
+            startActivity(new Intent(this, History.class));
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -241,6 +249,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             String count = dataSnapshot.child("count").getValue().toString();
                             String target = dataSnapshot.child("target").getValue().toString();
                             ids.add(id);
+                            if (count.equals(target)) completed_ids.add(id);
                             JikirData data = new JikirData(id, name, meaning, benefit, count, target);
                             jikirData.add(data);
                         }
@@ -267,7 +276,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         SharedPreferences.Editor prefEditor = pref.edit();
 
                         TodayJikirsAdapter cAdapter = new TodayJikirsAdapter(MainActivity.this,
-                                jikirData, jikir_name, jikir_meaning, count, user_jikirs_history);
+                                jikirData, jikir_name, jikir_meaning, count, user_jikirs, completed_ids);
                         cAdapter.seletedItemId = pref.getInt("selectedId", 0);
                         todays_jikirs.setAdapter(cAdapter);
 
@@ -281,8 +290,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             cAdapter.notifyDataSetChanged();
                         });
 
-                        selectedItemId = Integer.parseInt(jikirData.get(pref.getInt("selectedId", 0)).id);
-                        prefEditor.apply();
+                        todays_jikirs.setOnItemLongClickListener((AdapterView.OnItemLongClickListener) (parent, view, position, id) -> {
+                            Intent detailsIntent = new Intent(MainActivity.this, JikirDetails.class);
+                            detailsIntent.putExtra("jikir_id", jikirData.get(position).getId());
+                            detailsIntent.putExtra("jikir_name", jikirData.get(position).getName());
+                            detailsIntent.putExtra("jikir_meaning", jikirData.get(position).getMeaning());
+                            detailsIntent.putExtra("jikir_count", jikirData.get(position).getCount());
+                            detailsIntent.putExtra("jikir_benefit", jikirData.get(position).getBenefit());
+                            startActivity(detailsIntent);
+                            return true;
+                        });
+
+                        if(!jikirData.isEmpty()){
+                            selectedItemId = Integer.parseInt(jikirData.get(pref.getInt("selectedId", 0)).id);
+                            prefEditor.apply();
+                        }
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {}
@@ -335,8 +357,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         LocalTime asrLocalTime = LocalTime.parse(Asr.split(" ")[0]);
                         LocalTime maghribLocalTime = LocalTime.parse(Maghrib.split(" ")[0]);
                         LocalTime ishaLocalTime = LocalTime.parse(Isha.split(" ")[0]);
-                        LocalTime sunriseLocalTime = LocalTime.parse(Sunrise.split(" ")[0]);
-                        LocalTime sunsetLocalTime = LocalTime.parse(Sunset.split(" ")[0]);
 
                         MakeEnglishtoBangla metob = new MakeEnglishtoBangla();
                         sunRiseTime.setText(makeTwelveHour(Sunrise, 0) + " a.m");
@@ -356,8 +376,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         else if(currentLocalTime.compareTo(ishaLocalTime) < 0 && currentLocalTime.compareTo(asrLocalTime) > 0){
                             wakto.setText("মাগরিবঃ "+makeTwelveHour(Maghrib, 12)+"-"+makeTwelveHour(Isha, 12));
                         }
-                        else if(currentLocalTime.compareTo(fajrLocalTime) < 0 && currentLocalTime.compareTo(maghribLocalTime) > 0){
-                            wakto.setText("ইশাঃ "+makeTwelveHour(Isha, 12)+"-"+makeTwelveHour(Fajr, 12));
+                        else if(currentLocalTime.compareTo(maghribLocalTime) > 0){
+                            wakto.setText("ইশাঃ "+makeTwelveHour(Isha, 12)+"-"+makeTwelveHour(Fajr, 0));
                         }
 
                     } catch (JSONException e) {

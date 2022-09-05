@@ -35,17 +35,20 @@ public class TodayJikirsAdapter extends ArrayAdapter<JikirData> {
     String uid= FirebaseAuth.getInstance().getUid();
     TextView jname, jikir_meaning, count;
     int seletedItemId = 0;
-    DatabaseReference user_jikirs_history;
+    ArrayList<String> completed_ids;
+    DatabaseReference user_jikirs;
     MakeEnglishtoBangla metob = new MakeEnglishtoBangla();
 
     public TodayJikirsAdapter(Context context, ArrayList<JikirData> allJikirs, TextView jikir_name,
-                              TextView jikir_meaning, TextView count, DatabaseReference user_jikirs_history) {
+                              TextView jikir_meaning, TextView count, DatabaseReference user_jikirs,
+                              ArrayList<String> completed_ids) {
         super(context, R.layout.todays_jikir_listview_template, allJikirs);
         this.context = context;
         this.jname = jikir_name;
         this.jikir_meaning = jikir_meaning;
         this.count = count;
-        this.user_jikirs_history = user_jikirs_history;
+        this.completed_ids = completed_ids;
+        this.user_jikirs = user_jikirs;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -65,6 +68,7 @@ public class TodayJikirsAdapter extends ArrayAdapter<JikirData> {
 
         TextView jikir_name = convertView.findViewById(R.id.today_jikirs_name);
         TextView count_target = convertView.findViewById(R.id.countTarget);
+        TextView task_completed = convertView.findViewById(R.id.task_completed);
         ImageView notifi_icon = convertView.findViewById(R.id.notificationBtn);
         ImageView jikir_edit_btn = convertView.findViewById(R.id.jikirEditBtn);
 
@@ -81,7 +85,7 @@ public class TodayJikirsAdapter extends ArrayAdapter<JikirData> {
             target_count.setText(target);
 
             alertDialogBuilderLabelEdit.setPositiveButton("Save", (dialogBox, id12) -> {
-                DatabaseReference ref = user_jikirs_history.child(uid).child("Jikirs").child(java.time.LocalDate.now().toString())
+                DatabaseReference ref = user_jikirs.child(uid).child("Jikirs").child(java.time.LocalDate.now().toString())
                         .child(String.valueOf(getItem(position).getId()));
 
                         ref.child("count").setValue(String.valueOf(Integer.parseInt(metob.makeReverse(present_count.getText().toString()))));
@@ -94,7 +98,14 @@ public class TodayJikirsAdapter extends ArrayAdapter<JikirData> {
             alertDialogAndroid.show();
         });
         jikir_name.setText(name);
-        count_target.setText(metob.make(current_count+"/"+target));
+        if(current_count.equals(target)){
+            count_target.setVisibility(View.GONE);
+            task_completed.setVisibility(View.VISIBLE);
+        }
+        else {
+            task_completed.setVisibility(View.GONE);
+            count_target.setText(metob.make(current_count+"/"+target));
+        }
 
         if(seletedItemId == position){
             String nameOfJikir = getItem(seletedItemId).getName();
@@ -105,11 +116,15 @@ public class TodayJikirsAdapter extends ArrayAdapter<JikirData> {
             count.setText(metob.make(current));
             jikir_meaning.setText(meaningOfJikir);
             convertView.setBackgroundResource(R.drawable.rounded_green_bg);
+            task_completed.setBackgroundResource(R.drawable.rounded_white_bg);
+            task_completed.setTextColor(Color.parseColor("#000000"));
             jikir_name.setTextColor(Color.parseColor("#FFFFFF"));
             count_target.setTextColor(Color.parseColor("#FFFFFF"));
         }
         else{
             convertView.setBackgroundResource(R.drawable.rounded_white_bg);
+            task_completed.setBackgroundResource(R.drawable.rounded_green_bg);
+            task_completed.setTextColor(Color.parseColor("#FFFFFF"));
             jikir_name.setTextColor(Color.parseColor("#000000"));
             count_target.setTextColor(Color.parseColor("#000000"));
         }
