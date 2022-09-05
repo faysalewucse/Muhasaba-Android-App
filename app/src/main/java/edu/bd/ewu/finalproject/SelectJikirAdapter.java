@@ -2,6 +2,7 @@ package edu.bd.ewu.finalproject;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -75,6 +76,11 @@ public class SelectJikirAdapter extends ArrayAdapter<JikirData> {
                         .child(java.time.LocalDate.now().toString())
                         .child(selectedJikirs.get(i).id).setValue(selectedJikirs.get(i));
             }
+            SharedPreferences pref = context.getSharedPreferences("HASITEMID", Context.MODE_PRIVATE);
+            SharedPreferences.Editor prefEditor = pref.edit();
+            prefEditor.putBoolean("NewUser", false);
+            prefEditor.apply();
+
             Intent intent = new Intent(context, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);

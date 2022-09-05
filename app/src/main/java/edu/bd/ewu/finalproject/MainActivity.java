@@ -45,7 +45,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.atomic.AtomicReference;
@@ -238,6 +240,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         else if (item.getItemId() == R.id.leaderborad) {
             startActivity(new Intent(this, LeaderBoard.class));
         }
+        else if (item.getItemId() == R.id.history) {
+            startActivity(new Intent(this, History.class));
+        }
         return true;
     }
 
@@ -258,6 +263,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         jikirData.clear();
                         ids.clear();
                         length = snapshot.getChildrenCount();
+                        SharedPreferences pref = getSharedPreferences("HASITEMID", MODE_PRIVATE);
+                        SharedPreferences.Editor prefEditor = pref.edit();
                         for (DataSnapshot dataSnapshot: snapshot.getChildren()) {
                             String id = dataSnapshot.child("id").getValue().toString();
                             String name = dataSnapshot.child("name").getValue().toString();
@@ -289,8 +296,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             no_jikir_layout.setVisibility(View.GONE);
                             jikir_list_layout.setVisibility(View.VISIBLE);
                         }
-                        SharedPreferences pref = getSharedPreferences("HASITEMID", MODE_PRIVATE);
-                        SharedPreferences.Editor prefEditor = pref.edit();
 
                         TodayJikirsAdapter cAdapter = new TodayJikirsAdapter(MainActivity.this,
                                 jikirData, jikir_name, jikir_meaning, count, user_jikirs, completed_ids);
