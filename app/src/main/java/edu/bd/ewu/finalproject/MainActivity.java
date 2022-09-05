@@ -10,8 +10,10 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
+import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
@@ -56,6 +58,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
+    NetworkChangeListener networkChangeListener = new NetworkChangeListener();
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle toogle;
     String uid= FirebaseAuth.getInstance().getUid();
@@ -250,6 +253,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onStart() {
         super.onStart();
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListener, filter);
+
         jikir_name.setVisibility(View.GONE);
         jikir_meaning.setVisibility(View.GONE);
         jikir_progress.setVisibility(View.VISIBLE);
