@@ -1,14 +1,15 @@
 package edu.bd.ewu.finalproject;
 
 public class JikirData {
-    String id, name, meaning, benefit, count, target;
-    public JikirData(String id, String name, String meaning, String benefit, String count, String target) {
+    String id, name, meaning, benefit, count, target, notify;
+    public JikirData(String id, String name, String meaning, String benefit, String count, String target, String notify) {
         this.id = id;
         this.name = name;
         this.meaning = meaning;
         this.benefit = benefit;
         this.count = count;
         this.target = target;
+        this.notify = notify;
     }
 
     public String getId() {
@@ -56,5 +57,13 @@ public class JikirData {
 
     public void setTarget(String target) {
         this.target = target;
+    }
+
+    public String getNotify() {
+        return notify;
+    }
+
+    public void setNotify(String notify) {
+        this.notify = notify;
     }
 }

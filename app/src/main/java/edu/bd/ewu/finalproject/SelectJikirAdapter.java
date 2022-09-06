@@ -52,13 +52,14 @@ public class SelectJikirAdapter extends ArrayAdapter<JikirData> {
         String benefit = getItem(position).getBenefit();
         String count = getItem(position).getCount();
         String target = getItem(position).getTarget();
+        String notify = getItem(position).getNotify();
 
         TextView jikir_name = convertView.findViewById(R.id.select_jikirs_listview_listitem_jikir_text);
         CheckBox checkBox = convertView.findViewById(R.id.select_jikirs_listview_listitem_checkbox);
         jikir_name.setText(name);
 
         checkBox.setOnClickListener(v -> {
-            JikirData jikirData = new JikirData(id, name, meaning, benefit, count, target);
+            JikirData jikirData = new JikirData(id, name, meaning, benefit, count, target, notify);
             if(checkBox.isChecked())
             {
                 selectedJikirs.add(jikirData);
@@ -76,11 +77,6 @@ public class SelectJikirAdapter extends ArrayAdapter<JikirData> {
                         .child(java.time.LocalDate.now().toString())
                         .child(selectedJikirs.get(i).id).setValue(selectedJikirs.get(i));
             }
-            SharedPreferences pref = context.getSharedPreferences("HASITEMID", Context.MODE_PRIVATE);
-            SharedPreferences.Editor prefEditor = pref.edit();
-            prefEditor.putBoolean("NewUser", false);
-            prefEditor.apply();
-
             Intent intent = new Intent(context, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);

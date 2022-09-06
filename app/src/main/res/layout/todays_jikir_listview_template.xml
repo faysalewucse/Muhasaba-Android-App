@@ -41,7 +41,7 @@
         android:id="@+id/notificationBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_notification" />
+        android:src="@drawable/notify_off" />
 
     <ImageView
         android:id="@+id/jikirEditBtn"

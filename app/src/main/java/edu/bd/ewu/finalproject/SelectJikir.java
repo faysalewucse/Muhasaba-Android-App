@@ -47,7 +47,7 @@ public class SelectJikir extends AppCompatActivity {
                     String benefit = snapshot.child(String.valueOf(i)).child("benefit").getValue().toString();
 
                     if(!ids.contains(id)){
-                        JikirData jikirData = new JikirData(id, name, meaning, benefit, "0", "100");
+                        JikirData jikirData = new JikirData(id, name, meaning, benefit, "0", "100", "false");
                         data.add(jikirData);
                     }
 

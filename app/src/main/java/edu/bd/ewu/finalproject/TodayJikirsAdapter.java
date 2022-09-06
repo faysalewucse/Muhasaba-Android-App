@@ -1,17 +1,14 @@
 package edu.bd.ewu.finalproject;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Color;
-import android.media.Image;
 import android.os.Build;
-import android.view.Gravity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -20,11 +17,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.widget.AppCompatButton;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -51,6 +47,7 @@ public class TodayJikirsAdapter extends ArrayAdapter<JikirData> {
         this.user_jikirs = user_jikirs;
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     @RequiresApi(api = Build.VERSION_CODES.O)
     @NonNull
     @Override
@@ -65,12 +62,24 @@ public class TodayJikirsAdapter extends ArrayAdapter<JikirData> {
         String benefit = getItem(position).getBenefit();
         String current_count = getItem(position).getCount();
         String target = getItem(position).getTarget();
+        String notify = getItem(position).getNotify();
 
         TextView jikir_name = convertView.findViewById(R.id.today_jikirs_name);
         TextView count_target = convertView.findViewById(R.id.countTarget);
         TextView task_completed = convertView.findViewById(R.id.task_completed);
         ImageView notifi_icon = convertView.findViewById(R.id.notificationBtn);
         ImageView jikir_edit_btn = convertView.findViewById(R.id.jikirEditBtn);
+
+        notifi_icon.setOnClickListener(v -> {
+            if(notify.equals("false")){
+                FirebaseDatabase.getInstance().getReference("USERS").child(uid).child("Jikirs").child(java.time.LocalDate.now().toString())
+                        .child(id).child("notify").setValue("true");
+            }
+            else{
+                FirebaseDatabase.getInstance().getReference("USERS").child(uid).child("Jikirs").child(java.time.LocalDate.now().toString())
+                        .child(id).child("notify").setValue("false");
+            }
+        });
 
         jikir_edit_btn.setOnClickListener(v->{
             LayoutInflater layoutInflaterAndroid = LayoutInflater.from(context);
@@ -98,6 +107,12 @@ public class TodayJikirsAdapter extends ArrayAdapter<JikirData> {
             alertDialogAndroid.show();
         });
         jikir_name.setText(name);
+        if(notify.equals("false")){
+            notifi_icon.setImageResource(R.drawable.notify_off);
+        }
+        else{
+            notifi_icon.setImageResource(R.drawable.notify_on);
+        }
         if(current_count.equals(target)){
             count_target.setVisibility(View.GONE);
             task_completed.setVisibility(View.VISIBLE);

@@ -63,7 +63,8 @@ public class History extends AppCompatActivity {
                                 String benefit = dataSnapshot.child("benefit").getValue().toString();
                                 String count = dataSnapshot.child("count").getValue().toString();
                                 String target = dataSnapshot.child("target").getValue().toString();
-                                JikirData jikirData = new JikirData(id, name, meaning, benefit, count, target);
+                                String notify = dataSnapshot.child("notify").getValue().toString();
+                                JikirData jikirData = new JikirData(id, name, meaning, benefit, count, target, notify);
                                 data.add(jikirData);
                                 dates.add(ds.getKey());
                             }

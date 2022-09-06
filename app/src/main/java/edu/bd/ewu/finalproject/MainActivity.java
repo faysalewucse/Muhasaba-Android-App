@@ -150,7 +150,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         points = snapshot.child("points").getValue().toString();
                         leaderBoardDataRef.child(uid).child("points").setValue(String.valueOf(Integer.parseInt(points)+1));
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
 
@@ -278,9 +277,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             String benefit = dataSnapshot.child("benefit").getValue().toString();
                             String count = dataSnapshot.child("count").getValue().toString();
                             String target = dataSnapshot.child("target").getValue().toString();
+                            String notify = dataSnapshot.child("notify").getValue().toString();
                             ids.add(id);
                             if (count.equals(target)) completed_ids.add(id);
-                            JikirData data = new JikirData(id, name, meaning, benefit, count, target);
+                            JikirData data = new JikirData(id, name, meaning, benefit, count, target, notify);
                             jikirData.add(data);
                         }
                         if(length == 0){
@@ -289,6 +289,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
+                            prefEditor.putInt("selectedId", 0);
+                            prefEditor.apply();
                             no_jikir_layout.setVisibility(View.VISIBLE);
                             jikir_progress.setVisibility(View.GONE);
                             jikir_listview_progress.setVisibility(View.GONE);
@@ -309,12 +311,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         todays_jikirs.setAdapter(cAdapter);
 
                         todays_jikirs.setOnItemClickListener((parent, view, position, id) -> {
-
                             cAdapter.seletedItemId = position;
                             prefEditor.putInt("selectedId", position);
                             prefEditor.apply();
                             selectedItemId = Integer.parseInt(jikirData.get(position).id);
-                            System.out.println("IN Adapter: "+selectedItemId);
                             cAdapter.notifyDataSetChanged();
                         });
 
@@ -330,6 +330,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         });
 
                         if(!jikirData.isEmpty()){
+                            System.out.println(jikirData.get(0));
                             selectedItemId = Integer.parseInt(jikirData.get(pref.getInt("selectedId", 0)).id);
                             prefEditor.apply();
                         }
