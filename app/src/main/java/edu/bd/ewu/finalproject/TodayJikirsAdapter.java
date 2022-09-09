@@ -1,8 +1,11 @@
 package edu.bd.ewu.finalproject;
 
 import android.annotation.SuppressLint;
+import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.util.Log;
@@ -58,8 +61,6 @@ public class TodayJikirsAdapter extends ArrayAdapter<JikirData> {
 
         String id = getItem(position).getId();
         String name = getItem(position).getName();
-        String meaning = getItem(position).getMeaning();
-        String benefit = getItem(position).getBenefit();
         String current_count = getItem(position).getCount();
         String target = getItem(position).getTarget();
         String notify = getItem(position).getNotify();
